@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dodavanje artikala</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Početna</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/pretraga">Pretraga</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/dodavanje">Dodaj novi <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/izmena">Izmeni</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4 text-center">Dodavanje novog artikla</h1>
+    </div>
+</div>
+{{#if poruka}}
+    <div class="p-3 mb-2 bg-success text-white text-center">{{poruka}}</div>
+{{/if}}
+<div class="container-fluid">
+    <div class="col-md-4 offset-md-4 my-3">
+        <form action="/kreirajArtikal" enctype="multipart/form-data" method="post" autocomplete="off">
+            <div class="form-group">
+                <label for="slika" class="mr-2">Slika </label>
+                <input type="file" name="slika" id="slika" onchange="provera(this)" accept="image/png, image/jpg, image/jpeg, image/bmp">
+            </div>
+            <div class="form-group">
+                <label for="naziv">Naziv</label>
+                <input type="text" name="naziv" class="form-control" id="naziv" required>
+            </div>
+            <div class="form-group">
+                <label for="kategorija">Kategorija</label>
+                <input type="text" name="kategorija" class="form-control" id="kategorija" required>
+            </div>
+            <div class="form-group">
+                <label for="cena">Cena</label>
+                <input type="number" name="cena" class="form-control" id="cena" required>
+            </div>
+            <div class="form-group">
+                <label for="zalihe">Zalihe</label>
+                <input type="number" name="zalihe" class="form-control" id="zalihe" required>
+            </div>
+            <button type="submit" class="btn btn-outline-warning">Unesi artikal</button>
+            <button type="reset" class="btn btn-outline-warning">Ponisti</button>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>
+    function provera(inp) {
+
+        if(!inp.files[0].type.startsWith("image/",0))
+        {
+            inp.value=""
+            alert("Fajl mora biti slika (.png, .jpeg, .jpg ili .bmp)!");
+        }
+
+    }
+</script>
+</body>
+</html>
